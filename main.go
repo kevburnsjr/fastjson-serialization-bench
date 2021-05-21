@@ -17,6 +17,7 @@ func main() {
 		ctx.Response.Header.SetBytesV("Date", t.FormattedNow())
 		ctx.Response.Header.SetBytesV("Content-Type", contentTypeJson)
 		arena := arenaPool.Get()
+		arena.Reset()
 		s := arena.NewString("Hello, World!")
 		o, _ := arena.NewObject().Object()
 		o.Set("message", s)
