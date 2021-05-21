@@ -1,7 +1,9 @@
 # fastjson-serialization-bench
 
-This repo does 245k req/s out of the box with a c5n.4xlarge client and c5n.xlarge server in a placement group
-on an unmodified AWS linux 2 AMI.
+This repo was created in response to the following blog post:  
+https://talawah.io/blog/extreme-http-performance-tuning-one-point-two-million/
+
+It demonstrates a 245k req/s baseline using fastjson and fasthttp with a c5n.4xlarge client and c5n.xlarge server in a placement group on an unmodified AWS linux 2 AMI.
 
 ## Ground Zero
 
