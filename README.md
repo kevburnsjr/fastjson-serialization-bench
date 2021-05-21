@@ -1,24 +1,25 @@
 # fastjson-serialization-bench
 
-This repo does 230k+ req/s out of the box with a c5n.xlarge client and c5n.xlarge server on an unmodified AWS linux 2 AMI.
+This repo does 245k req/s out of the box with a c5n.4xlarge client and c5n.xlarge server in a placement group
+on an unmodified AWS linux 2 AMI.
 
 ## Ground Zero
 
 ```
-> ./twrk -t 4 -c 256 -D 2 -d 10 --latency --pin-cpus "http://54.213.147.90:8080/json" -H 'Host: server.tfb' -H 'Accept: application/json,text/html;q=0.9,application/xhtml+xml;q=0.9,application/xml;q=0.8,*/*;q=0.7' -H 'Connection: keep-alive'
-Running 10s test @ http://54.213.147.90:8080/json
-  4 threads and 256 connections
+> $ ./twrk -t 16 -c 256 -D 2 -d 10 --latency --pin-cpus "http://172.31.35.0:8080/json" -H 'Host: server.tfb' -H 'Accept: application/json,text/html;q=0.9,application/xhtml+xml;q=0.9,application/xml;q=0.8,*/*;q=0.7' -H 'Connection: keep-alive'
+Running 10s test @ http://172.31.35.0:8080/json
+  16 threads and 256 connections
   Thread Stats   Avg     Stdev       Max       Min   +/- Stdev
-    Latency     1.11ms    1.94ms  209.41ms  165.00us   97.99%
-    Req/Sec    59.59k    12.28k    72.07k    37.29k    74.75%
+    Latency     1.13ms    0.87ms   13.59ms   64.00us   77.10%
+    Req/Sec    15.40k   343.76     16.42k    13.43k    71.65%
   Latency Distribution
-  50.00%    0.94ms
-  90.00%    2.01ms
-  99.00%    3.58ms
-  99.99%  116.62ms
-  2371816 requests in 10.00s, 380.01MB read
-Requests/sec: 237179.84
-Transfer/sec:     38.00MB
+  50.00%    0.97ms
+  90.00%    2.18ms
+  99.00%    4.12ms
+  99.99%   11.04ms
+  2452813 requests in 10.00s, 392.98MB read
+Requests/sec: 245279.56
+Transfer/sec:     39.30MB
 ```
 
 Server setup
